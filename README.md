@@ -1,29 +1,49 @@
-# Neuro / Evil Neuro Desktop Pets
+# Neuro / Evil Neuro 桌宠
 
-Windows files for the original Neuro and Evil Neuro Shimeji packages, with Simplified Chinese menus and more legible menus.
+这是 Neuro 和 Evil Neuro 原版 Shimeji 桌宠的 Windows 整理版，包含简体中文菜单、更加清晰易读的菜单样式，以及开箱即用的 Java 8 运行环境。
 
-## Requirements
+## 系统要求
 
-- Windows 10 or later with Windows PowerShell 5.1 and desktop (AWT system-tray) support.
-- The launcher uses Windows PowerShell; it does not require Git Bash.
+- Windows 10 或更高版本。
+- 系统需要支持 Windows PowerShell 5.1 和桌面系统托盘（AWT）。
+- 不需要提前安装 Java，也不需要使用 Git Bash 启动。
 
-Matching 32-bit and 64-bit Eclipse Temurin Java 8 distributions are bundled in `runtime/` as their original vendor archives. On first launch, the selected runtime is extracted to the user's Local AppData cache; no Java installation or network access is needed. The launcher then searches `JAVA_HOME`, standard Java installation folders, and `PATH` for a matching Java 8 fallback if the bundled runtime is unavailable. It does not silently use Java 11, 17, or 21.
+仓库的 `runtime` 目录中包含 Eclipse Temurin Java 8 的 64 位和 32 位 Windows 运行时。首次启动时，启动器会根据 Windows 位数选择对应版本，并将其解压到当前用户的 `%LOCALAPPDATA%\Neuro-Evil-Desktop-Pet\runtime` 缓存目录。整个过程不需要联网，也不会修改系统安装的 Java。
 
-## Launch
+如果内置运行时不可用，启动器才会依次检查 `JAVA_HOME`、常见 Java 安装目录和 `PATH`，并且只使用位数匹配的 Java 8，不会误用 Java 11、17 或 21。
 
-- Double-click `启动Neuro.cmd` for Neuro.
-- Double-click `启动Evil.cmd` for Evil Neuro.
-- Extract the repository first; do not launch from a ZIP preview.
-- Quit from the mascot's tray menu with `Dismiss All`.
+## 启动方法
 
-The launcher sets `Language=zh-CN` and starts the selected mascot from its own directory. Each mascot folder contains its original JAR, images, configuration, libraries, and license.
+1. 下载或克隆完整仓库，不要只下载其中几个文件。
+2. 如果下载的是源码压缩包，请先完整解压，不要直接在压缩包预览窗口中运行。
+3. 双击 `启动Neuro.cmd` 启动 Neuro。
+4. 双击 `启动Evil.cmd` 启动 Evil Neuro。
+5. 如需退出，在桌宠的系统托盘菜单中选择“全部退出”。
 
-## Fixes
+两个启动入口可以分别运行，也可以同时运行。首次启动需要解压 Java 8，速度可能比之后启动稍慢。
 
-- The Neuro package's original archive used a top-level directory name ending with a space. The repository uses a normal `Neuro` directory.
-- Launchers explicitly select a Java 8 runtime with the same 32/64-bit architecture as Windows.
-- Both packages default to Simplified Chinese and use an opaque, high-contrast menu theme with 15-point Microsoft YaHei.
-- Matching Java 8 runtimes for 32-bit and 64-bit Windows are included (about 79 MB compressed total); first launch extracts only the matching architecture. No separate Java installation is needed.
-- Logs from previous runs are not included.
+## 本版本的修改
 
-The original Java application and JNA desktop integration are old software. The launchers improve runtime selection but cannot guarantee compatibility with every Windows build, security policy, display scaling mode, or multi-monitor setup. No Windows-version matrix or automated GUI test has been run; verify on the intended PCs before distributing broadly.
+- 保留 Neuro 和 Evil Neuro 原版 JAR、图片、配置文件、依赖库及许可证文件。
+- 修复原始 Neuro 压缩包顶层目录名末尾带空格，导致部分 Windows 环境无法正常定位文件的问题。
+- 启动器会根据 Windows 位数明确选择 64 位或 32 位 Java 8。
+- Neuro 和 Evil Neuro 默认使用简体中文菜单。
+- 菜单采用不透明、高对比度配色，并使用 15 磅微软雅黑，提高文字清晰度。
+- 内置 64 位和 32 位 Eclipse Temurin Java 8，无需用户另外安装 Java。
+- 不包含以前运行产生的日志文件。
+
+## 文件说明
+
+- `Neuro/`：Neuro 桌宠的程序、图片和配置。
+- `Evil/`：Evil Neuro 桌宠的程序、图片和配置。
+- `runtime/`：官方 Eclipse Temurin Java 8 运行时发行包。
+- `Start-Original-Shimeji.ps1`：负责选择和解压 Java 8、设置中文并启动桌宠。
+- `启动Neuro.cmd`：Neuro 的双击启动入口。
+- `启动Evil.cmd`：Evil Neuro 的双击启动入口。
+- `使用说明.txt`：简短的本地使用说明。
+
+## 兼容性说明
+
+本版本主要面向 Windows 10 和 Windows 11，并同时提供 64 位及 32 位 Java 8。原始 Shimeji 程序及其 JNA 桌面集成已经比较老旧，因此无法保证兼容所有 Windows 版本、企业安全策略、显示缩放设置或多显示器环境。准备分发给大量用户前，建议先在目标电脑上测试。
+
+Java 8 运行时来自 Eclipse Adoptium Temurin 项目，其版本、许可证和 SHA-256 校验值可在 [`runtime/README.md`](runtime/README.md) 中查看。
