@@ -5,8 +5,7 @@
 ## 系统要求
 
 - Windows 10 或更高版本。
-- 系统需要支持 Windows PowerShell 5.1 和桌面系统托盘（AWT）。
-- 不需要提前安装 Java，也不需要使用 Git Bash 启动。
+- 不需要提前安装 Java
 
 仓库的 `runtime` 目录中包含 Eclipse Temurin Java 8 的 64 位和 32 位 Windows 运行时。首次启动时，启动器会根据 Windows 位数选择对应版本，并将其解压到当前用户的 `%LOCALAPPDATA%\Neuro-Evil-Desktop-Pet\runtime` 缓存目录。整个过程不需要联网，也不会修改系统安装的 Java。
 
