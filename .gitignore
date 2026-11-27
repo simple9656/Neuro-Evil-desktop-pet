@@ -1,0 +1,4 @@
+*.log
+*.lck
+hs_err_pid*.log
+_runtime-downloads/
